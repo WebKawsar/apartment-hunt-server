@@ -69,6 +69,6 @@ client.connect(err => {
   console.log("Database Connected");
 });
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(`Apartment Hunt listening at http://localhost:${port}`)
 })
