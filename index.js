@@ -3,6 +3,7 @@ const app = express()
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
+const ObjectId = require("mongodb").ObjectId;
 require("dotenv").config();
 const port = 8080
 
@@ -59,6 +60,14 @@ client.connect(err => {
     })
   })
 
+  app.get("/singleServiceById/:id", (req, res) => {
+    serviceCollection.find({ _id: ObjectId(req.params.id) })
+    .toArray((error, documents) => {
+      // console.log(documents);
+      res.send(documents[0]);
+  });
+
+  })
 
   console.log("Database Connected");
 });
