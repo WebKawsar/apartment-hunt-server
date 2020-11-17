@@ -27,6 +27,7 @@ app.get('/', (req, res) => {
 
 client.connect(err => {
   const serviceCollection = client.db(`${process.env.DB_NAME}`).collection("addService");
+  const bookingCollection = client.db(`${process.env.DB_NAME}`).collection("bookingList");
 
 
   app.post("/addService", (req, res) => {
@@ -66,6 +67,20 @@ client.connect(err => {
       // console.log(documents);
       res.send(documents[0]);
   });
+
+  app.post("/bookApartment", (req, res) => {
+
+    const data = req.body;
+
+    bookingCollection.insertOne(data)
+    .then(result => {
+
+      res.send(result.insertedCount > 0)
+    })
+
+  })
+
+
 
   })
 
