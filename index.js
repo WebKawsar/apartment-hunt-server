@@ -62,6 +62,17 @@ client.connect(err => {
 
       console.log(result.insertedCount > 0);
     })
+    
+
+    app.get('/getAllServices', (req, res) => {
+      ordersCollection.find({})
+        .toArray((err, documents) => {
+          res.send(documents)
+        })
+    })
+
+
+
 
   })
 
