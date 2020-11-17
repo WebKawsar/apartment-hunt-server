@@ -53,9 +53,9 @@ client.connect(err => {
 
   app.get("/getAllServices", (req, res) => {
     serviceCollection.find({})
-    .toArray((documents, error) => {
+    .toArray((error, documents) => {
 
-      console.log(documents);
+      res.send(documents)
     })
   })
 
