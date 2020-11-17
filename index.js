@@ -25,24 +25,10 @@ app.get('/', (req, res) => {
 
 
 client.connect(err => {
-  const addServiceCollection = client.db(`${process.env.DB_NAME}`).collection("addService");
+  const serviceCollection = client.db(`${process.env.DB_NAME}`).collection("addService");
 
 
   app.post("/addService", (req, res) => {
-
-    // const data = req.body;
-    // const file = req.files.image;
-    // const fileData = file.data;
-    // // console.log(fileData);
-
-    // const encImg = fileData.toString("base64");
-
-    // const image = {
-    //   contentType: file.mimetype,
-    //   size: file.size,
-    //   img: Buffer.from(encImg, "base64")
-    // }
-
 
     const file = req.files.image;
     const insertData = JSON.parse(req.body.data);
@@ -57,12 +43,20 @@ client.connect(err => {
     };
 
     insertData.image = image;
-    addServiceCollection.insertOne(insertData)
+    serviceCollection.insertOne(insertData)
     .then(result => {
 
-      console.log(result.insertedCount > 0);
+      res.send(result.insertedCount > 0)
     })
 
+  })
+
+  app.get("/getAllServices", (req, res) => {
+    serviceCollection.find({})
+    .toArray((documents, error) => {
+
+      console.log(documents);
+    })
   })
 
 
