@@ -90,6 +90,34 @@ client.connect(err => {
   })
 
 
+  app.get("/getSingleUserBooking/:email", (req, res) => {
+
+    bookingCollection.find({email: req.params.email})
+    .toArray((error, documents) => {
+
+      res.send(documents[0])
+    })
+  })
+
+
+  
+  //update 
+  app.patch("/updateSurviceById/:id", (req, res) => {
+
+    ordersCollection.updateOne({ _id: ObjectId(req.params.id) },
+      {
+          $set: { status: req.body.status }
+      }
+    )
+    .then(result => {
+
+        res.send(result.modifiedCount > 0);
+    });
+
+  });
+
+  
+
   })
 
   console.log("Database Connected");
