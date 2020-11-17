@@ -80,6 +80,14 @@ client.connect(err => {
 
   })
 
+  app.get("/getBookingList", (req, res) => {
+
+    bookingCollection.find({})
+    .toArray((error, documents) => {
+
+      res.send(documents)
+    })
+  })
 
 
   })
