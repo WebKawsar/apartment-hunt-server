@@ -90,14 +90,14 @@ client.connect(err => {
   })
 
 
-  app.get("/getSingleUserBooking/:email", (req, res) => {
+  // app.get("/getSingleUserBooking/:email", (req, res) => {
 
-    bookingCollection.find({email: req.params.email})
-    .toArray((error, documents) => {
+  //   bookingCollection.find({email: req.params.email})
+  //   .toArray((error, documents) => {
 
-      res.send(documents[0])
-    })
-  })
+  //     res.send(documents[0])
+  //   })
+  // })
 
 
   
